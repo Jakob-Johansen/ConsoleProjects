@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace CreateABook
 {
 
+    // Command class
     public class Command
     {
         public string InputCommand { get; set; }
@@ -15,6 +16,7 @@ namespace CreateABook
 
     public class Commands
     {
+        // List with all commands.
         private readonly List<Command> command = new()
         {
             new Command() { InputCommand = "!help", Description = "Shows a list with all commands." },
@@ -22,11 +24,26 @@ namespace CreateABook
             new Command() { InputCommand = "!ShowAll", Description = "Shows all books."}
         };
 
-        public void Start()
+        // A method that print out all the commands.
+        public void ShowCommands()
         {
+            Console.WriteLine("List of all commands:");
             foreach (var item in command)
             {
                 Console.WriteLine(" " + item.InputCommand + " - " + item.Description);
+            }
+            Console.WriteLine("");
+        }
+
+        // The method that runs when the program starts.
+        public void Start()
+        {
+            while (true)
+            {
+                ShowCommands();
+                Console.Write("Command: ");
+                Console.ReadLine();
+                Console.WriteLine();
             }
         }
     }
