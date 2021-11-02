@@ -31,7 +31,7 @@ namespace CreateABook
             if (book.Count == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(" Der er ikke nogen boeger at vise.\n");
+                Console.WriteLine(" There is no books to show.\n");
                 Console.ResetColor();
             }
         }
