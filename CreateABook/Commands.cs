@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace CreateABook
 {
-
     // Command class
     public class Command
     {
@@ -16,12 +15,15 @@ namespace CreateABook
 
     public class Commands
     {
+        Books books = new();
+
         // List with all commands.
         private readonly List<Command> command = new()
         {
-            new Command() { InputCommand = "!help", Description = "Shows a list with all commands." },
-            new Command() { InputCommand = "!Create", Description = "Starting create book mode."},
-            new Command() { InputCommand = "!ShowAll", Description = "Shows all books."}
+            new Command() { InputCommand = "help", Description = "Shows a list with all commands." },
+            new Command() { InputCommand = "create", Description = "Starting create book mode."},
+            new Command() { InputCommand = "showall", Description = "Shows all books."},
+            new Command() { InputCommand = "clear", Description = "Clears the console"}
         };
 
         // A method that print out all the commands.
@@ -35,15 +37,37 @@ namespace CreateABook
             Console.WriteLine("");
         }
 
-        // The method that runs when the program starts.
+        // A method that runs when the program starts.
         public void Start()
         {
+            string userCommand;
+
+            //ShowCommands();
+
             while (true)
             {
-                ShowCommands();
                 Console.Write("Command: ");
-                Console.ReadLine();
+                userCommand = Console.ReadLine();
                 Console.WriteLine();
+
+                switch (userCommand.Trim().ToLower())
+                {
+                    case "help":
+                        ShowCommands();
+                    break;
+                    case "create":
+                        books.CreateBook();
+                    break;
+                    case "showall":
+                        books.ShowAll();
+                    break;
+                    case "clear":
+                        Console.Clear();
+                    break;
+                    default:
+                        Console.WriteLine("This command does not exists. Type help to see all commands.\n");
+                    break;
+                }
             }
         }
     }
