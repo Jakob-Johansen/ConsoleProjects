@@ -4,11 +4,11 @@ namespace CreateABook
 {
     class Program
     {
+        // I dette program kan du oprette bøger, redigere bøger og få dem vist i Konsol.
         static void Main(string[] args)
         {
-            // I dette program kan du oprette bøger, redigere bøger og få dem vist i Konsol.
-
-            Console.WriteLine("Hello World!");
+            Commands commands = new();
+            commands.Start();
         }
     }
 }
