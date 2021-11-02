@@ -21,14 +21,18 @@ namespace CreateABook
 
         public void CreateBook()
         {
-
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(" Under Construction.\n");
+            Console.ResetColor();
         }
 
         public void ShowAll()
         {
             if (book.Count == 0)
             {
-                Console.WriteLine("Der er ikke nogen boeger at vise.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(" Der er ikke nogen boeger at vise.\n");
+                Console.ResetColor();
             }
         }
     }
