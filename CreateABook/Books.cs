@@ -17,13 +17,42 @@ namespace CreateABook
 
     public class Books
     {
-        List<Book> book = new();
+        private List<Book> book = new();
 
         public void CreateBook()
         {
+            //string userInput;
+            //string commandName = "Title: ";
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(" Under Construction.\n");
             Console.ResetColor();
+
+            //Book _book = new();
+
+            //while (true)
+            //{
+
+            //    //book.Add(new Book
+            //    //{
+            //    //    Title = "",
+            //    //    Author = "",
+            //    //    Category = "",
+            //    //    Published = "",
+            //    //});
+
+            //    Console.Write(commandName);
+            //    userInput = Console.ReadLine();
+
+
+            //    if (userInput.Length != 0)
+            //    {
+            //        _book.Title = userInput;
+
+            //        Console.WriteLine(_book.Title);
+            //    }
+
+            //}
         }
 
         public void ShowAll()
@@ -33,6 +62,15 @@ namespace CreateABook
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(" There is no books to show.\n");
                 Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine("-All Books-\n");
+
+                foreach (var item in book)
+                {
+                    Console.WriteLine("Title: " + item.Title + "\nAuthor: " + item.Author + "\nCategory: " + item.Category + "\nPublished: " + item.Published + "\n");
+                }
             }
         }
     }
