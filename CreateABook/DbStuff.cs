@@ -31,9 +31,6 @@ namespace CreateABook
             try
             {
                 sqlCommand.Connection.Open();
-
-                int rowsAffected = sqlCommand.ExecuteNonQuery();
-                Console.WriteLine("\nRowsAffected: {0}\n", rowsAffected);
             }
             catch (Exception ex)
             {
