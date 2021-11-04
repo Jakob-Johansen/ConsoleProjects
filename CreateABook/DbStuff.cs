@@ -30,7 +30,12 @@ namespace CreateABook
 
             try
             {
-                sqlCommand.Connection.Open();
+                connection.Open();
+
+                if (sqlCommand.ExecuteNonQuery() == 0)
+                {
+                    Console.WriteLine("\nError inserting data into Database.\n");
+                }
             }
             catch (Exception ex)
             {
@@ -38,8 +43,34 @@ namespace CreateABook
                 Console.WriteLine("\n" + ex.Message + "\n");
                 return;
             }
+        }
 
-            sqlCommand.Connection.Close();
+        public void GetAllBooks()
+        {
+            string queryString = "SELECT * FROM dbo.Book";
+
+            using SqlConnection connection = new(connString);
+
+            SqlCommand sqlCommand = new(queryString, connection);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n" + ex.Message + "\n");
+                return;
+            }
         }
     }
 }
