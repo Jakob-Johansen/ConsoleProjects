@@ -84,7 +84,9 @@ namespace CreateABook
 
         public void ShowAll()
         {
-            if (book.Count == 0)
+            var allBooks = db.GetAllBooks();
+
+            if (allBooks.Count == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(" There is no books to show.\n");
@@ -95,11 +97,10 @@ namespace CreateABook
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("-All Books-\n");
 
-
                 Console.ForegroundColor = ConsoleColor.White;
-                foreach (var item in book)
+                foreach (var item in allBooks)
                 {
-                    Console.WriteLine("Title: " + item.Title + "\nAuthor: " + item.Author + "\nCategory: " + item.Category + "\nPublished: " + item.Published + "\n");
+                    Console.WriteLine("Id: " + item.Id + "\nTitle: " + item.Title + "\nAuthor: " + item.Author + "\nCategory: " + item.Category + "\nPublished: " + item.Published + "\n");
                 }
                 Console.ResetColor();
             }

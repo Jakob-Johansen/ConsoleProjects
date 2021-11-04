@@ -45,8 +45,11 @@ namespace CreateABook
             }
         }
 
-        public void GetAllBooks()
+        public List<Book> GetAllBooks()
         {
+
+            List<Book> books = new();
+
             string queryString = "SELECT * FROM dbo.Book";
 
             using SqlConnection connection = new(connString);
@@ -61,7 +64,15 @@ namespace CreateABook
 
                 while (reader.Read())
                 {
-                    
+                    Book book = new();
+
+                    book.Id = (int)reader["Id"];
+                    book.Title = reader["Title"].ToString();
+                    book.Author = reader["Author"].ToString();
+                    book.Category = reader["Category"].ToString();
+                    book.Published = reader["Published"].ToString();
+
+                    books.Add(book);
                 }
 
                 reader.Close();
@@ -69,8 +80,9 @@ namespace CreateABook
             catch (Exception ex)
             {
                 Console.WriteLine("\n" + ex.Message + "\n");
-                return;
+                return null;
             }
+            return books;
         }
     }
 }
