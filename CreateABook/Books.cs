@@ -9,6 +9,7 @@ namespace CreateABook
     // Book class
     public class Book
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
         public string Category { get; set; }
@@ -18,6 +19,7 @@ namespace CreateABook
     public class Books
     {
         private readonly List<Book> book = new();
+        DbStuff db = new();
 
         public void CreateBook()
         {
@@ -73,7 +75,7 @@ namespace CreateABook
                 }
             }
 
-            book.Add(createBook);
+            db.InsertBook(createBook);
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nThe book has been created!\n");
