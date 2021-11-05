@@ -84,5 +84,43 @@ namespace CreateABook
             }
             return books;
         }
+
+        public Book GetBook(int Id)
+        {
+            Book book = new();
+
+            string queryString = "SELECT * FROM dbo.Book WHERE ID=@Id";
+
+            using SqlConnection connection = new(connString);
+            SqlCommand sqlCommand = new(queryString, connection);
+
+            sqlCommand.Parameters.AddWithValue("@Id", Id);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    book.Id = (int)reader["Id"];
+                    book.Title = reader["Title"].ToString();
+                    book.Author = reader["Author"].ToString();
+                    book.Category = reader["Category"].ToString();
+                    book.Published = reader["Published"].ToString();
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
+            return book;
+        }
+
     }
 }
