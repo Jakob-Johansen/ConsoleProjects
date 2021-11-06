@@ -23,6 +23,7 @@ namespace CreateABook
             new Command() { InputCommand = "help", Description = "Shows a list with all commands." },
             new Command() { InputCommand = "create", Description = "Starting create book mode."},
             new Command() { InputCommand = "showall", Description = "Shows all books."},
+            new Command() { InputCommand = "delete", Description = "Delete a book, use delete (Id)." },
             new Command() { InputCommand = "clear", Description = "Clears the console"}
         };
 
@@ -63,6 +64,8 @@ namespace CreateABook
                     break;
                     case "clear":
                         Console.Clear();
+                    break;
+                    case "delete":
                     break;
                     default:
                         Console.WriteLine("This command does not exists. Type help to see all commands.\n");
