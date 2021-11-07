@@ -105,5 +105,10 @@ namespace CreateABook
                 Console.ResetColor();
             }
         }
+
+        public void DeleteBook(int Id)
+        {
+            Console.WriteLine("The ID is: " + Id + "\n");
+        }
     }
 }

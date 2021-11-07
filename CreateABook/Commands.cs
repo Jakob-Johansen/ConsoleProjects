@@ -23,7 +23,7 @@ namespace CreateABook
             new Command() { InputCommand = "help", Description = "Shows a list with all commands." },
             new Command() { InputCommand = "create", Description = "Starting create book mode."},
             new Command() { InputCommand = "showall", Description = "Shows all books."},
-            new Command() { InputCommand = "delete", Description = "Delete a book, use delete (Id)." },
+            new Command() { InputCommand = "delete", Description = "Delete a book, use delete (ID)." },
             new Command() { InputCommand = "clear", Description = "Clears the console"}
         };
 
@@ -48,10 +48,10 @@ namespace CreateABook
             while (true)
             {
                 Console.Write("Command: ");
-                userCommand = Console.ReadLine();
+                userCommand = Console.ReadLine().Trim().ToLower();
                 Console.WriteLine();
 
-                switch (userCommand.Trim().ToLower())
+                switch (userCommand)
                 {
                     case "help":
                         ShowCommands();
@@ -65,9 +65,28 @@ namespace CreateABook
                     case "clear":
                         Console.Clear();
                     break;
-                    case "delete":
-                    break;
                     default:
+
+                        string[] userCommandSplit = userCommand.Split(' ');
+
+                        if (userCommandSplit.Length == 2 && userCommandSplit[0] == "delete")
+                        {
+                            bool intCheck = int.TryParse(userCommandSplit[1], out int bookId);
+
+                            // if true
+                            if (intCheck)
+                            {
+                                books.DeleteBook(bookId);
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("The ID need to be a number.\n");
+                                Console.ResetColor();
+                            }
+                            break;
+                        }
+
                         Console.WriteLine("This command does not exists. Type help to see all commands.\n");
                     break;
                 }
