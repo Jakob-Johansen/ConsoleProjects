@@ -108,6 +108,10 @@ namespace CreateABook
 
         public void DeleteBook(int Id)
         {
+            if (Id == 0)
+            {
+            }
+
             Console.WriteLine("The ID is: " + Id + "\n");
         }
     }

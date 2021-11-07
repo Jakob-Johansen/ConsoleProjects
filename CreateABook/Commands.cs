@@ -67,10 +67,14 @@ namespace CreateABook
                     break;
                     default:
 
+                        // Creates an array that contains the user input and splits the user input.  
                         string[] userCommandSplit = userCommand.Split(' ');
 
+                        // Checks if the array contains 2 strings and then checks if the first string in the array is == "delete" string.
                         if (userCommandSplit.Length == 2 && userCommandSplit[0] == "delete")
                         {
+                            // Creates a bool that is true if second string in the array can parse to an int
+                            // and then creates an int with the parsed string.
                             bool intCheck = int.TryParse(userCommandSplit[1], out int bookId);
 
                             // if true
