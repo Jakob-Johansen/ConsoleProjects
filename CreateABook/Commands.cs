@@ -23,7 +23,7 @@ namespace CreateABook
             new Command() { InputCommand = "help", Description = "Shows a list with all commands." },
             new Command() { InputCommand = "create", Description = "Starting create book mode."},
             new Command() { InputCommand = "showall", Description = "Shows all books."},
-            new Command() { InputCommand = "delete", Description = "Delete a book, use delete (ID)." },
+            new Command() { InputCommand = "delete", Description = "Deletes a book, use delete ID." },
             new Command() { InputCommand = "clear", Description = "Clears the console"}
         };
 
@@ -64,6 +64,11 @@ namespace CreateABook
                     break;
                     case "clear":
                         Console.Clear();
+                    break;
+                    case "delete":
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("You forgot the ID of the book you want to delete.\n");
+                        Console.ResetColor();
                     break;
                     default:
 
