@@ -21,8 +21,8 @@ namespace CreateABook
             string queryString = "INSERT INTO dbo.Book (Title, Author, Category, Published) VALUES (@Title, @Author, @Category, @Published)";
 
             using SqlConnection connection = new(connString);
+            using SqlCommand sqlCommand = new(queryString, connection);
 
-            SqlCommand sqlCommand = new(queryString, connection);
             sqlCommand.Parameters.AddWithValue("@Title", book.Title);
             sqlCommand.Parameters.AddWithValue("@Author", book.Author);
             sqlCommand.Parameters.AddWithValue("@Category", book.Category);
@@ -31,35 +31,33 @@ namespace CreateABook
             try
             {
                 connection.Open();
-
                 if (sqlCommand.ExecuteNonQuery() == 0)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("\nError inserting data into Database.\n");
+                    Console.ResetColor();
                 }
             }
             catch (Exception ex)
             {
-
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\n" + ex.Message + "\n");
-                return;
+                Console.ResetColor();
             }
         }
 
         public List<Book> GetAllBooks()
         {
-
             List<Book> books = new();
 
             string queryString = "SELECT * FROM dbo.Book";
 
             using SqlConnection connection = new(connString);
-
-            SqlCommand sqlCommand = new(queryString, connection);
+            using SqlCommand sqlCommand = new(queryString, connection);
 
             try
             {
                 connection.Open();
-
                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
                 while (reader.Read())
@@ -79,8 +77,9 @@ namespace CreateABook
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\n" + ex.Message + "\n");
-                return null;
+                Console.ResetColor();
             }
             return books;
         }
@@ -92,14 +91,13 @@ namespace CreateABook
             string queryString = "SELECT * FROM dbo.Book WHERE ID=@Id";
 
             using SqlConnection connection = new(connString);
-            SqlCommand sqlCommand = new(queryString, connection);
+            using SqlCommand sqlCommand = new(queryString, connection);
 
             sqlCommand.Parameters.AddWithValue("@Id", Id);
 
             try
             {
                 connection.Open();
-
                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
                 while (reader.Read())
@@ -115,12 +113,38 @@ namespace CreateABook
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return null;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n" + ex.Message + "\n");
+                Console.ResetColor();
             }
 
             return book;
         }
 
+        public void DeleteBook(int Id)
+        {
+            string queryString = "DELETE FROM dbo.Book WHERE Id=@Id";
+
+            using SqlConnection connection = new(connString);
+            using SqlCommand sqlCommand = new(queryString, connection);
+
+            sqlCommand.Parameters.AddWithValue("@Id", Id);
+
+            try
+            {
+                connection.Open();
+                sqlCommand.ExecuteNonQuery();
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("The book was deleted.\n");
+                Console.ResetColor();
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n" + ex.Message + "\n");
+                Console.ResetColor();
+            }
+        }
     }
 }

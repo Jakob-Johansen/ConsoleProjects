@@ -18,7 +18,6 @@ namespace CreateABook
 
     public class Books
     {
-        private readonly List<Book> book = new();
         DbStuff db = new();
 
         public void CreateBook()
@@ -29,11 +28,12 @@ namespace CreateABook
 
             Book createBook = new();
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("You are creating a new book.\n");
+            Console.ResetColor();
 
             while (loopCheck)
             {
-
                 Console.Write(commandName);
                 userInput = Console.ReadLine().Trim();
 
@@ -100,7 +100,14 @@ namespace CreateABook
                 Console.ForegroundColor = ConsoleColor.White;
                 foreach (var item in allBooks)
                 {
-                    Console.WriteLine("Id: " + item.Id + "\nTitle: " + item.Title + "\nAuthor: " + item.Author + "\nCategory: " + item.Category + "\nPublished: " + item.Published + "\n");
+                    Console.WriteLine(
+                        "Id: " + item.Id +
+                        "\nTitle: " + item.Title +
+                        "\nAuthor: " + item.Author +
+                        "\nCategory: " + item.Category +
+                        "\nPublished: " + item.Published +
+                        "\n"
+                        );
                 }
                 Console.ResetColor();
             }
@@ -108,11 +115,52 @@ namespace CreateABook
 
         public void DeleteBook(int Id)
         {
-            if (Id == 0)
+            var thisBook = db.GetBook(Id);
+            string userCommand;
+            bool loopCheck = true;
+
+            if (thisBook == null || thisBook.Id == 0)   
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("The book with ID: " + Id + ", doesn't exist.\n");
+                Console.ResetColor();
+                return;
             }
 
-            Console.WriteLine("The ID is: " + Id + "\n");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("-THE BOOK YOU WANT TO DELETE-");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(
+                "\n ID: " + thisBook.Id +
+                "\n Title: " + thisBook.Title +
+                "\n Author: " + thisBook.Author +
+                "\n Category: " + thisBook.Category +
+                "\n Published: " + thisBook.Published +
+                "\n"
+                );
+            Console.ResetColor();
+
+            while (loopCheck)
+            {
+                Console.Write("Are you sure you want to delete this book (Y/N): ");
+                userCommand = Console.ReadLine().Trim().ToLower();
+
+                switch (userCommand)
+                {
+                    case "y":
+                        db.DeleteBook(Id);
+                        loopCheck = false;
+                    break;
+                    case "n":
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("The book was NOT deleted.\n");
+                        Console.ResetColor();
+                        loopCheck = false;
+                    break;
+                }
+            }
         }
     }
 }
