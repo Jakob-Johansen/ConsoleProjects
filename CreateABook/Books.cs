@@ -95,17 +95,17 @@ namespace CreateABook
             else
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("-All Books-\n");
+                Console.WriteLine("-All Books(" + allBooks.Count + ")-\n");
 
                 Console.ForegroundColor = ConsoleColor.White;
                 foreach (var item in allBooks)
                 {
                     Console.WriteLine(
-                        "Id: " + item.Id +
-                        "\nTitle: " + item.Title +
-                        "\nAuthor: " + item.Author +
-                        "\nCategory: " + item.Category +
-                        "\nPublished: " + item.Published +
+                        " Id: " + item.Id +
+                        "\n Title: " + item.Title +
+                        "\n Author: " + item.Author +
+                        "\n Category: " + item.Category +
+                        "\n Published: " + item.Published +
                         "\n"
                         );
                 }
