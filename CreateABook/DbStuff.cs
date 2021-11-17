@@ -90,8 +90,8 @@ namespace CreateABook
 
             string queryString = "SELECT * FROM dbo.Book WHERE ID=@Id";
 
-            using SqlConnection connection = new(connString);
-            using SqlCommand sqlCommand = new(queryString, connection);
+           using SqlConnection connection = new(connString);
+           using SqlCommand sqlCommand = new(queryString, connection);
 
             sqlCommand.Parameters.AddWithValue("@Id", Id);
 
